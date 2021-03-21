@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Molis</string>
+    <string name="task_list_screen_label">Tasks</string>
 </resources>
