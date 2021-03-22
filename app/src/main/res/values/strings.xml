@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Molis</string>
     <string name="task_list_screen_label">Tasks</string>
+    <string name="add_task_desc">Add task</string>
 </resources>
