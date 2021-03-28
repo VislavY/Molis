@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Task name"
+        android:hint="@string/hint_task_name"
         android:autofillHints="true"
         android:focusable="true"
         android:focusableInTouchMode="true"/>
@@ -32,6 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:text="Create"
+        android:text="@string/button_text_create"
         style="@style/Widget.MaterialComponents.Button.TextButton"/>
 </LinearLayout>
