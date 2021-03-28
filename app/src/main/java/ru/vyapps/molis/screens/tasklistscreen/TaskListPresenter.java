@@ -25,7 +25,8 @@ public class TaskListPresenter {
         view.showTasks(adapter);
     }
 
-    public void createTask(Task task) {
+    public void createTask(String taskName) {
+        Task task = new Task(taskName);
         tasks.add(task);
         adapter.notifyDataSetChanged();
     }

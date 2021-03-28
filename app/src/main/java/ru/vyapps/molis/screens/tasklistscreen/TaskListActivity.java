@@ -6,14 +6,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import ru.vyapps.molis.R;
 import ru.vyapps.molis.models.adapters.TasksAdapter;
+import ru.vyapps.molis.models.pojo.Task;
 import ru.vyapps.molis.screens.createtaskscreen.TaskCreationSheet;
 
 public class TaskListActivity extends AppCompatActivity implements TaskListView {
 
     private RecyclerView recyclerViewTasks;
+
+    private TaskCreationSheet taskCreationSheet;
 
     private TaskListPresenter presenter;
 
@@ -26,7 +34,6 @@ public class TaskListActivity extends AppCompatActivity implements TaskListView 
 
         presenter = new TaskListPresenter(this);
         presenter.loadTasksAdapter();
-
     }
 
     @Override
@@ -35,8 +42,8 @@ public class TaskListActivity extends AppCompatActivity implements TaskListView 
         recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
-    public void onFABClick(View view) {
-        TaskCreationSheet taskCreationSheet = new TaskCreationSheet();
-        taskCreationSheet.show(getSupportFragmentManager(), "TAG");
+    public void onClickFAB(View view) {
+        taskCreationSheet = new TaskCreationSheet(presenter);
+        taskCreationSheet.show(getSupportFragmentManager(), "TaskCreationSheet");
     }
 }

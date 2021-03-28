@@ -2,13 +2,13 @@ package ru.vyapps.molis.models.pojo;
 
 public class Task {
 
-    private String title;
+    private String name;
 
-    public Task(String title) {
-        this.title = title;
+    public Task(String name) {
+        this.name = name;
     }
 
     public String getTitle() {
-        return title;
+        return name;
     }
 }

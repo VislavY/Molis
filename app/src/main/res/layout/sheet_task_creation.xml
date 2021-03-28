@@ -17,7 +17,7 @@
         android:background="@drawable/rounded_rectangle"/>
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextTaskName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
