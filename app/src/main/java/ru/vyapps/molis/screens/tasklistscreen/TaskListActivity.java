@@ -5,13 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.LinearLayout;
-
-import java.util.ArrayList;
+import android.view.View;
 
 import ru.vyapps.molis.R;
 import ru.vyapps.molis.models.adapters.TasksAdapter;
-import ru.vyapps.molis.models.pojo.Task;
+import ru.vyapps.molis.screens.createtaskscreen.TaskCreationSheet;
 
 public class TaskListActivity extends AppCompatActivity implements TaskListView {
 
@@ -28,11 +26,17 @@ public class TaskListActivity extends AppCompatActivity implements TaskListView 
 
         presenter = new TaskListPresenter(this);
         presenter.loadTasksAdapter();
+
     }
 
     @Override
     public void showTasks(TasksAdapter adapter) {
         recyclerViewTasks.setAdapter(adapter);
         recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    }
+
+    public void onFABClick(View view) {
+        TaskCreationSheet taskCreationSheet = new TaskCreationSheet();
+        taskCreationSheet.show(getSupportFragmentManager(), "TAG");
     }
 }
