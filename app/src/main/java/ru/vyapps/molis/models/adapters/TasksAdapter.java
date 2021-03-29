@@ -1,5 +1,6 @@
 package ru.vyapps.molis.models.adapters;
 
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,14 +40,25 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
         return tasks.size();
     }
 
-    static class TasksViewHolder extends RecyclerView.ViewHolder {
+    class TasksViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewTitle;
+        private View buttonCompleteTask;
 
         public TasksViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
+            buttonCompleteTask = itemView.findViewById(R.id.buttonCompleteTask);
+
+            buttonCompleteTask.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int adapterPosition = getAdapterPosition();
+                    tasks.remove(adapterPosition);
+                    notifyItemRemoved(adapterPosition);
+                }
+            });
         }
     }
 }

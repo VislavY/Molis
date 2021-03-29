@@ -6,16 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import ru.vyapps.molis.R;
 import ru.vyapps.molis.models.adapters.TasksAdapter;
-import ru.vyapps.molis.models.pojo.Task;
-import ru.vyapps.molis.screens.createtaskscreen.TaskCreationSheet;
 
 public class TaskListActivity extends AppCompatActivity implements TaskListView {
 
