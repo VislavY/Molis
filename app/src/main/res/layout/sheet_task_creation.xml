@@ -16,16 +16,21 @@
         android:layout_gravity="center"
         android:background="@drawable/rounded_rectangle"/>
 
-    <EditText
-        android:id="@+id/editTextTaskName"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutTaskName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/hint_task_name"
-        android:autofillHints="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"/>
+        android:layout_marginTop="8dp"
+        app:errorEnabled="true"
+        app:boxBackgroundColor="@null">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextTaskName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_task_name"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/buttonCreateTask"
