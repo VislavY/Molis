@@ -43,12 +43,10 @@ public class TaskCreationSheet extends BottomSheetDialogFragment {
         buttonCreateTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String taskName = editTextTaskName.getText().toString().trim();
-//                presenter.createTask(taskName);
-//
-//                dismiss();
+                String taskName = textInputEditTextTaskName.getText().toString().trim();
+                presenter.createTask(taskName);
 
-                textInputLayoutTaskName.setError("Ошибка");
+                dismiss();
             }
         });
 

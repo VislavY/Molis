@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="18dp"
-        android:src="@drawable/add"
+        android:src="@drawable/round_add_24"
         android:contentDescription="@string/create_task_desc"
         android:onClick="onClickFAB"
         app:elevation="0dp"
