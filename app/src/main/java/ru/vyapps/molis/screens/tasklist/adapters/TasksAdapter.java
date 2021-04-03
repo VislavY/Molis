@@ -1,6 +1,5 @@
-package ru.vyapps.molis.models.adapters;
+package ru.vyapps.molis.screens.tasklist.adapters;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

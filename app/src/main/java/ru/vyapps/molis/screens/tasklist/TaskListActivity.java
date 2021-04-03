@@ -1,4 +1,4 @@
-package ru.vyapps.molis.screens.tasklistscreen;
+package ru.vyapps.molis.screens.tasklist;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 
-import ru.vyapps.molis.R;
-import ru.vyapps.molis.models.adapters.TasksAdapter;
+import java.util.ArrayList;
 
-public class TaskListActivity extends AppCompatActivity implements TaskListView {
+import ru.vyapps.molis.R;
+import ru.vyapps.molis.models.pojo.Task;
+import ru.vyapps.molis.screens.tasklist.adapters.TasksAdapter;
+
+public class TaskListActivity extends AppCompatActivity implements TaskListContract.View {
 
     private RecyclerView recyclerViewTasks;
 
@@ -26,13 +29,22 @@ public class TaskListActivity extends AppCompatActivity implements TaskListView 
         recyclerViewTasks = findViewById(R.id.recyclerViewTasks);
 
         presenter = new TaskListPresenter(this);
-        presenter.loadTasksAdapter();
+        presenter.loadTasks();
     }
 
     @Override
-    public void showTasks(TasksAdapter adapter) {
+    public void showTasks(ArrayList<Task> tasks) {
+        TasksAdapter adapter = new TasksAdapter(tasks);
         recyclerViewTasks.setAdapter(adapter);
         recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    }
+
+    @Override
+    public void showTask(int taskIndex) {
+        TasksAdapter adapter = (TasksAdapter) recyclerViewTasks.getAdapter();
+        if (adapter != null) {
+            adapter.notifyItemChanged(taskIndex);
+        }
     }
 
     public void onClickFAB(View view) {

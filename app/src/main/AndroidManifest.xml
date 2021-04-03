@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Molis">
-        <activity android:name=".screens.tasklistscreen.TaskListActivity" android:label="@string/task_list_screen_label">
+        <activity android:name=".screens.tasklist.TaskListActivity" android:label="@string/task_list_screen_label">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
