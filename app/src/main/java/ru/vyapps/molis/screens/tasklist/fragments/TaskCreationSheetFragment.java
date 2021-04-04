@@ -1,4 +1,4 @@
-package ru.vyapps.molis.screens.tasklist;
+package ru.vyapps.molis.screens.tasklist.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,16 +15,17 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import ru.vyapps.molis.R;
+import ru.vyapps.molis.screens.tasklist.TaskListContract;
 
-public class TaskCreationSheet extends BottomSheetDialogFragment {
+public class TaskCreationSheetFragment extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private TextInputLayout textInputLayoutTaskName;
     private TextInputEditText textInputEditTextTaskName;
     private Button buttonCreateTask;
 
-    private TaskListPresenter presenter;
+    private TaskListContract.Presenter presenter;
 
-    public TaskCreationSheet(TaskListPresenter presenter) {
+    public TaskCreationSheetFragment(TaskListContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
@@ -32,22 +33,24 @@ public class TaskCreationSheet extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        return inflater.inflate(R.layout.sheet_task_creation, container, false);
+    }
 
-        View view = inflater.inflate(R.layout.sheet_task_creation, container, false);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         textInputLayoutTaskName = view.findViewById(R.id.textInputLayoutTaskName);
         textInputEditTextTaskName = view.findViewById(R.id.textInputEditTextTaskName);
         buttonCreateTask = view.findViewById(R.id.buttonCreateTask);
 
-        buttonCreateTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String taskName = textInputEditTextTaskName.getText().toString().trim();
-                presenter.createTask(taskName);
+        buttonCreateTask.setOnClickListener(this);
+    }
 
-                dismiss();
-            }
-        });
-
-        return view;
+    @Override
+    public void onClick(View v) {
+        String taskName = textInputEditTextTaskName.getText().toString().trim();
+        presenter.createTask(taskName);
+        dismiss();
     }
 }

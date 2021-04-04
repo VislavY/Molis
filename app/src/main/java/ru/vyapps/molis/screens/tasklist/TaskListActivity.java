@@ -12,12 +12,11 @@ import java.util.ArrayList;
 import ru.vyapps.molis.R;
 import ru.vyapps.molis.models.pojo.Task;
 import ru.vyapps.molis.screens.tasklist.adapters.TasksAdapter;
+import ru.vyapps.molis.screens.tasklist.fragments.TaskCreationSheetFragment;
 
 public class TaskListActivity extends AppCompatActivity implements TaskListContract.View {
 
     private RecyclerView recyclerViewTasks;
-
-    private TaskCreationSheet taskCreationSheet;
 
     private TaskListPresenter presenter;
 
@@ -48,7 +47,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskListContr
     }
 
     public void onClickFAB(View view) {
-        taskCreationSheet = new TaskCreationSheet(presenter);
-        taskCreationSheet.show(getSupportFragmentManager(), "TaskCreationSheet");
+        TaskCreationSheetFragment taskCreationSheetFragment = new TaskCreationSheetFragment(presenter);
+        taskCreationSheetFragment.show(getSupportFragmentManager(), "TaskCreationSheet");
     }
 }
