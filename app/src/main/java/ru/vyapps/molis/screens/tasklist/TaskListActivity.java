@@ -5,7 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -14,7 +18,9 @@ import ru.vyapps.molis.models.pojo.Task;
 import ru.vyapps.molis.screens.tasklist.adapters.TasksAdapter;
 import ru.vyapps.molis.screens.tasklist.fragments.TaskCreationSheetFragment;
 
-public class TaskListActivity extends AppCompatActivity implements TaskListContract.View {
+public class TaskListActivity extends AppCompatActivity implements TaskListContract.View, TextWatcher {
+
+    private TaskCreationSheetFragment taskCreationSheet;
 
     private RecyclerView recyclerViewTasks;
 
@@ -24,6 +30,8 @@ public class TaskListActivity extends AppCompatActivity implements TaskListContr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
+        taskCreationSheet = new TaskCreationSheetFragment(this);
 
         recyclerViewTasks = findViewById(R.id.recyclerViewTasks);
 
@@ -46,8 +54,42 @@ public class TaskListActivity extends AppCompatActivity implements TaskListContr
         }
     }
 
+    @Override
+    public void enableCreateTaskButton() {
+        Button buttonCreateTask = taskCreationSheet.getButtonCreateTask();
+        buttonCreateTask.setEnabled(true);
+    }
+
+    @Override
+    public void disableCreateTaskButton() {
+        Button buttonCreateTask = taskCreationSheet.getButtonCreateTask();
+        buttonCreateTask.setEnabled(false);
+    }
+
     public void onClickFAB(View view) {
-        TaskCreationSheetFragment taskCreationSheetFragment = new TaskCreationSheetFragment(presenter);
-        taskCreationSheetFragment.show(getSupportFragmentManager(), "TaskCreationSheet");
+        taskCreationSheet.show(getSupportFragmentManager(), "TaskCreationSheet");
+    }
+
+    public void onClickCreateTaskButton(View view) {
+        EditText editTextTaskName = taskCreationSheet.getEditTextTaskName();
+        String taskName = editTextTaskName.getText().toString().trim();
+        presenter.createTask(taskName);
+
+        taskCreationSheet.dismiss();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        presenter.taskNameChanged(s.toString());
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }

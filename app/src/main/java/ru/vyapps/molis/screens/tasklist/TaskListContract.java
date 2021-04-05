@@ -9,10 +9,13 @@ public interface TaskListContract {
     interface View {
         void showTasks(ArrayList<Task> tasks);
         void showTask(int index);
+        void enableCreateTaskButton();
+        void disableCreateTaskButton();
     }
 
     interface Presenter {
         void loadTasks();
         void createTask(String name);
+        void taskNameChanged(String taskName);
     }
 }

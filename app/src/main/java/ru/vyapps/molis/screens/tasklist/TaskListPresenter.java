@@ -31,4 +31,13 @@ public class TaskListPresenter implements TaskListContract.Presenter {
 
         view.showTask(tasks.size());
     }
+
+    @Override
+    public void taskNameChanged(String taskName) {
+        if (!taskName.isEmpty()) {
+            view.enableCreateTaskButton();
+        } else {
+            view.disableCreateTaskButton();
+        }
+    }
 }
