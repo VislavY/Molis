@@ -1,4 +1,4 @@
-package ru.vyapps.molis.screens.tasklist.adapters;
+package ru.vyapps.molis.screens.tasklist.adapters.task;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ru.vyapps.molis.R;
 import ru.vyapps.molis.models.pojo.Task;
 
-public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHolder> {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TasksViewHolder> implements  TaskTouchHelperAdapter {
 
     private ArrayList<Task> tasks;
 
-    public TasksAdapter(ArrayList<Task> tasks) {
+    public TaskAdapter(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -39,7 +40,29 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
         return tasks.size();
     }
 
-    class TasksViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onTaskMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(tasks, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(tasks, i, i - 1);
+            }
+        }
+
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onTaskDismiss(int position) {
+        tasks.remove(position);
+        notifyItemRemoved(position);
+    }
+
+
+    class TasksViewHolder extends RecyclerView.ViewHolder  {
 
         private TextView textViewTitle;
         private View buttonCompleteTask;
@@ -60,4 +83,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
             });
         }
     }
+
+
 }

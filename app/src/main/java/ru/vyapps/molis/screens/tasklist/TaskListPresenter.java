@@ -2,7 +2,6 @@ package ru.vyapps.molis.screens.tasklist;
 
 import java.util.ArrayList;
 
-import ru.vyapps.molis.screens.tasklist.adapters.TasksAdapter;
 import ru.vyapps.molis.models.pojo.Task;
 
 public class TaskListPresenter implements TaskListContract.Presenter {

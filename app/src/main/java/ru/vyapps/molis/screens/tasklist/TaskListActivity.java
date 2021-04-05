@@ -1,6 +1,7 @@
 package ru.vyapps.molis.screens.tasklist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +16,8 @@ import java.util.ArrayList;
 
 import ru.vyapps.molis.R;
 import ru.vyapps.molis.models.pojo.Task;
-import ru.vyapps.molis.screens.tasklist.adapters.TasksAdapter;
+import ru.vyapps.molis.screens.tasklist.adapters.task.TaskTouchHelperCallback;
+import ru.vyapps.molis.screens.tasklist.adapters.task.TaskAdapter;
 import ru.vyapps.molis.screens.tasklist.fragments.TaskCreationSheetFragment;
 
 public class TaskListActivity extends AppCompatActivity implements TaskListContract.View, TextWatcher {
@@ -41,14 +43,18 @@ public class TaskListActivity extends AppCompatActivity implements TaskListContr
 
     @Override
     public void showTasks(ArrayList<Task> tasks) {
-        TasksAdapter adapter = new TasksAdapter(tasks);
+        TaskAdapter adapter = new TaskAdapter(tasks);
         recyclerViewTasks.setAdapter(adapter);
         recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        TaskTouchHelperCallback taskTouchHelperCallback = new TaskTouchHelperCallback(adapter);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(taskTouchHelperCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerViewTasks);
     }
 
     @Override
     public void showTask(int taskIndex) {
-        TasksAdapter adapter = (TasksAdapter) recyclerViewTasks.getAdapter();
+        TaskAdapter adapter = (TaskAdapter) recyclerViewTasks.getAdapter();
         if (adapter != null) {
             adapter.notifyItemChanged(taskIndex);
         }
