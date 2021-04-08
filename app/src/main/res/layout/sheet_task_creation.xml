@@ -31,6 +31,5 @@
         android:layout_gravity="end"
         android:text="@string/button_text_create"
         android:enabled="false"
-        android:onClick="onClickCreateTaskButton"
         style="@style/Widget.MaterialComponents.Button.TextButton"/>
 </LinearLayout>

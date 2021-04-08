@@ -12,25 +12,18 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import ru.vyapps.molis.R;
-import ru.vyapps.molis.screens.tasklist.TaskListActivity;
-import ru.vyapps.molis.screens.tasklist.TaskListContract;
 
 public class TaskCreationSheetFragment extends BottomSheetDialogFragment {
 
     private EditText editTextTaskName;
     private Button buttonCreateTask;
 
-    private TaskListContract.View mainView;
-
-    public TaskCreationSheetFragment(TaskListContract.View mainView) {
-        this.mainView = mainView;
-    }
+    private TaskCreationViewModel viewModel;
 
     @Nullable
     @Override
@@ -46,14 +39,38 @@ public class TaskCreationSheetFragment extends BottomSheetDialogFragment {
         editTextTaskName = view.findViewById(R.id.editTextTaskName);
         buttonCreateTask = view.findViewById(R.id.buttonCreateTask);
 
-        editTextTaskName.addTextChangedListener((TextWatcher) mainView);
-    }
+        viewModel = new TaskCreationViewModel(getActivity().getApplication());
+        viewModel.getCreateTaskButtonEnabled().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                buttonCreateTask.setEnabled(aBoolean);
+            }
+        });
 
-    public EditText getEditTextTaskName() {
-        return editTextTaskName;
-    }
+        editTextTaskName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-    public Button getButtonCreateTask() {
-        return buttonCreateTask;
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                viewModel.taskNameChanged(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        buttonCreateTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taskName = editTextTaskName.getText().toString().trim();
+                viewModel.createTask(taskName);
+                dismiss();
+            }
+        });
     }
 }
