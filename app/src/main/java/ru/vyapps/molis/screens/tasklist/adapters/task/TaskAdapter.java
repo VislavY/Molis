@@ -1,10 +1,12 @@
 package ru.vyapps.molis.screens.tasklist.adapters.task;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,7 +39,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TasksViewHolde
     @Override
     public void onBindViewHolder(@NonNull TasksViewHolder holder, int position) {
         Task task = tasks.get(position);
-        holder.textViewName.setText(task.getName());
+        holder.checkedTextViewTaskName.setText(task.getName());
     }
 
     @Override
@@ -81,12 +83,25 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TasksViewHolde
     }
 
     static class TasksViewHolder extends RecyclerView.ViewHolder  {
-        private TextView textViewName;
+        private CheckedTextView checkedTextViewTaskName;
 
         public TasksViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewName = itemView.findViewById(R.id.textViewTitle);
+            checkedTextViewTaskName = itemView.findViewById(R.id.textViewTitle);
+
+            checkedTextViewTaskName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkedTextViewTaskName.setChecked(!checkedTextViewTaskName.isChecked());
+
+                    if (checkedTextViewTaskName.isChecked()) {
+                        checkedTextViewTaskName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                    } else {
+                        checkedTextViewTaskName.setPaintFlags(0);
+                    }
+                }
+            });
         }
     }
 }
