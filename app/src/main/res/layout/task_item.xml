@@ -12,7 +12,6 @@
         android:layout_marginHorizontal="8dp"
         android:orientation="horizontal">
 
-
         <CheckedTextView
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"

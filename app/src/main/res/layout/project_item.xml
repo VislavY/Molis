@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <CheckedTextView
-        android:id="@+id/projectNameCheckedTextView"
+        android:id="@+id/checkedTextViewProjectName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
