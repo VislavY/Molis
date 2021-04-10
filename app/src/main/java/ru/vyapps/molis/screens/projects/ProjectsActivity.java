@@ -8,6 +8,7 @@ import android.view.View;
 
 import ru.vyapps.molis.R;
 import ru.vyapps.molis.screens.projects.adapters.ProjectsAdapter;
+import ru.vyapps.molis.screens.projects.fragments.projectcreation.ProjectCreationBottomSheetFragment;
 
 public class ProjectsActivity extends AppCompatActivity {
 
@@ -28,6 +29,7 @@ public class ProjectsActivity extends AppCompatActivity {
     }
 
     public void onFABClick(View view) {
-
+        ProjectCreationBottomSheetFragment projectCreationBottomSheet = new ProjectCreationBottomSheetFragment();
+        projectCreationBottomSheet.show(getSupportFragmentManager(), ProjectCreationBottomSheetFragment.TAG);
     }
 }
