@@ -2,8 +2,13 @@
     <string name="app_name">Molis</string>
     <string name="task_list_screen_label">Tasks</string>
     <string name="projects_screen_label">Projects</string>
+
     <string name="create_task_desc">Create new task</string>
-    <string name="hint_task_name">Task name</string>
-    <string name="button_text_create">Create</string>
     <string name="complete_task_desc">Complete task</string>
+
+    <string name="hint_task_name">Task name</string>
+    <string name="hint_project_name">Project name</string>
+
+    <string name="button_text_create">Create</string>
+
 </resources>
