@@ -66,5 +66,14 @@ public class ProjectCreationBottomSheetFragment extends BottomSheetDialogFragmen
                 buttonCreateProject.setEnabled(aBoolean);
             }
         });
+
+        buttonCreateProject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String projectName = editTextProjectName.getText().toString().trim();
+                viewModel.createProject(projectName);
+                dismiss();
+            }
+        });
     }
 }
