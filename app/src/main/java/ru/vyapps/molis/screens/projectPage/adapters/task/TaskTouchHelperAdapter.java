@@ -1,4 +1,4 @@
-package ru.vyapps.molis.screens.tasklist.adapters.task;
+package ru.vyapps.molis.screens.projectPage.adapters.task;
 
 public interface TaskTouchHelperAdapter {
 

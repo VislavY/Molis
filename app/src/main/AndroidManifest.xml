@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".screens.tasklist.TaskListActivity"
+            android:name=".screens.projectPage.ProjectPageActivity"
             android:label="@string/task_list_screen_label" >
         </activity>
     </application>

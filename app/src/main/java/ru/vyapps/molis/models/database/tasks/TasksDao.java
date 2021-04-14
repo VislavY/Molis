@@ -14,14 +14,17 @@ import ru.vyapps.molis.models.pojo.Task;
 public interface TasksDao {
 
     @Query("SELECT * FROM tasks")
-    LiveData<List<Task>> getAllTasks();
+    LiveData<List<Task>> getAll();
+
+    @Query("SELECT * FROM tasks WHERE rootProject IN (:projectName)")
+    LiveData<List<Task>> getAllByProject(String projectName);
 
     @Insert
-    void insertTask(Task task);
+    void insert(Task task);
 
     @Delete
-    void deleteTask(Task task);
+    void delete(Task task);
 
     @Query("DELETE FROM tasks")
-    void deleteAllTasks();
+    void deleteAll();
 }

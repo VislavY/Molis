@@ -1,4 +1,4 @@
-package ru.vyapps.molis.screens.tasklist.fragments;
+package ru.vyapps.molis.screens.projectPage.fragments;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -28,8 +28,8 @@ public class TaskCreationViewModel extends AndroidViewModel {
         createTaskButtonEnabled.setValue(!taskName.isEmpty());
     }
 
-    public void createTask(String name) {
-        Task task = new Task(name);
+    public void createTask(String rootProjectName, String name) {
+        Task task = new Task(rootProjectName, name);
         new InsertTaskTask().execute(task);
     }
 
@@ -41,7 +41,7 @@ public class TaskCreationViewModel extends AndroidViewModel {
         @Override
         protected Void doInBackground(Task... tasks) {
             if (tasks != null && tasks.length > 0) {
-                database.getDao().insertTask(tasks[0]);
+                database.getDao().insert(tasks[0]);
             }
 
             return null;
@@ -49,6 +49,6 @@ public class TaskCreationViewModel extends AndroidViewModel {
     }
 
     public void a () {
-        System.out.println(database.getDao().getAllTasks());
+        System.out.println(database.getDao().getAll());
     }
 }

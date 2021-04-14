@@ -46,8 +46,8 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
         this.onProjectClickListener = l;
     }
 
-    private interface OnProjectClickListener {
-        void onClick();
+    public interface OnProjectClickListener {
+        void onClick(Project project);
     }
 
     class ProjectsViewHolder extends RecyclerView.ViewHolder {
@@ -63,7 +63,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
                 @Override
                 public void onClick(View v) {
                     if (onProjectClickListener != null) {
-                        onProjectClickListener.onClick();
+                        onProjectClickListener.onClick(projects.get(getAdapterPosition()));
                     }
                 }
             });

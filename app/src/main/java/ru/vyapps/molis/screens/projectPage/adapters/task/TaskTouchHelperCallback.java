@@ -1,4 +1,4 @@
-package ru.vyapps.molis.screens.tasklist.adapters.task;
+package ru.vyapps.molis.screens.projectPage.adapters.task;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;

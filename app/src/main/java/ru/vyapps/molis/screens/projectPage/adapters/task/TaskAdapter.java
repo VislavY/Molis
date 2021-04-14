@@ -1,4 +1,4 @@
-package ru.vyapps.molis.screens.tasklist.adapters.task;
+package ru.vyapps.molis.screens.projectPage.adapters.task;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,7 +74,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TasksViewHolde
         @Override
         protected Void doInBackground(Task... tasks) {
             if (tasks != null && tasks.length > 0) {
-                database.getDao().deleteTask(tasks[0]);
+                database.getDao().delete(tasks[0]);
             }
 
             return null;

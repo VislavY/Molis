@@ -8,11 +8,11 @@ import androidx.room.PrimaryKey;
 public class Project {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int uid;
     private String name;
 
-    public Project(int id, String name) {
-        this.id = id;
+    public Project(int uid, String name) {
+        this.uid = uid;
         this.name = name;
     }
 
@@ -21,12 +21,12 @@ public class Project {
         this.name = name;
     }
 
-    public void setId (int id) {
-        this.id = id;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
-    public int getId() {
-        return id;
+    public int getUid() {
+        return uid;
     }
 
     public void setName(String name) {

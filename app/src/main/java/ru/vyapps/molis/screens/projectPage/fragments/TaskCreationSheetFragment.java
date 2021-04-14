@@ -1,4 +1,4 @@
-package ru.vyapps.molis.screens.tasklist.fragments;
+package ru.vyapps.molis.screens.projectPage.fragments;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,10 +20,15 @@ import ru.vyapps.molis.R;
 
 public class TaskCreationSheetFragment extends BottomSheetDialogFragment {
 
+    private TaskCreationViewModel viewModel;
+    private String projectName;
+
     private EditText editTextTaskName;
     private Button buttonCreateTask;
 
-    private TaskCreationViewModel viewModel;
+    public TaskCreationSheetFragment (String projectName) {
+        this.projectName = projectName;
+    }
 
     @Nullable
     @Override
@@ -68,7 +73,7 @@ public class TaskCreationSheetFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 String taskName = editTextTaskName.getText().toString().trim();
-                viewModel.createTask(taskName);
+                viewModel.createTask(projectName, taskName);
                 dismiss();
             }
         });

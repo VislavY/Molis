@@ -1,4 +1,4 @@
-package ru.vyapps.molis.screens.tasklist;
+package ru.vyapps.molis.screens.projectPage;
 
 import android.app.Application;
 
@@ -11,19 +11,17 @@ import java.util.List;
 import ru.vyapps.molis.models.database.tasks.TasksDatabase;
 import ru.vyapps.molis.models.pojo.Task;
 
-public class TaskListViewModel extends AndroidViewModel {
+public class ProjectPageViewModel extends AndroidViewModel {
 
     private static TasksDatabase database;
-    private LiveData<List<Task>> tasks;
 
-    public TaskListViewModel(@NonNull Application application) {
+    public ProjectPageViewModel(@NonNull Application application) {
         super(application);
 
         database = TasksDatabase.getInstance(application);
-        tasks = database.getDao().getAllTasks();
     }
 
-    public LiveData<List<Task>> getTasks() {
-        return tasks;
+    public LiveData<List<Task>> getTasks(String projectName) {
+        return database.getDao().getAllByProject(projectName);
     }
 }

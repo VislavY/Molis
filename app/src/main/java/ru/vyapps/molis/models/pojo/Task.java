@@ -8,25 +8,36 @@ import androidx.room.PrimaryKey;
 public class Task {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int uid;
+    private String rootProject;
     private String name;
 
-    public Task(int id, String name) {
-        this.id = id;
+    public Task(int uid, String rootProject, String name) {
+        this.uid = uid;
+        this.rootProject = rootProject;
         this.name = name;
     }
 
     @Ignore
-    public Task(String name) {
+    public Task(String rootProject, String name) {
+        this.rootProject = rootProject;
         this.name = name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
-    public int getId() {
-        return id;
+    public int getUid() {
+        return uid;
+    }
+
+    public void setRootProject(String projectName) {
+        this.rootProject = projectName;
+    }
+
+    public String getRootProject() {
+        return rootProject;
     }
 
     public void setName(String name) {

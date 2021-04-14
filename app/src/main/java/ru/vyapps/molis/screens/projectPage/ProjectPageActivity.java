@@ -1,4 +1,4 @@
-package ru.vyapps.molis.screens.tasklist;
+package ru.vyapps.molis.screens.projectPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -13,25 +13,30 @@ import java.util.List;
 
 import ru.vyapps.molis.R;
 import ru.vyapps.molis.models.pojo.Task;
-import ru.vyapps.molis.screens.tasklist.adapters.task.TaskTouchHelperCallback;
-import ru.vyapps.molis.screens.tasklist.adapters.task.TaskAdapter;
-import ru.vyapps.molis.screens.tasklist.fragments.TaskCreationSheetFragment;
+import ru.vyapps.molis.screens.projectPage.adapters.task.TaskTouchHelperCallback;
+import ru.vyapps.molis.screens.projectPage.adapters.task.TaskAdapter;
+import ru.vyapps.molis.screens.projectPage.fragments.TaskCreationSheetFragment;
 
-public class TaskListActivity extends AppCompatActivity  {
+public class ProjectPageActivity extends AppCompatActivity  {
+
+    private String projectName;
+
+    private ProjectPageViewModel viewModel;
 
     private RecyclerView recyclerViewTasks;
-
-    private TaskListViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
 
+        projectName = getIntent().getStringExtra("projectName");
+        getSupportActionBar().setTitle(projectName);
+
         recyclerViewTasks = findViewById(R.id.recyclerViewTasks);
 
-        viewModel = new TaskListViewModel(getApplication());
-        viewModel.getTasks().observe(this, new Observer<List<Task>>() {
+        viewModel = new ProjectPageViewModel(getApplication());
+        viewModel.getTasks(projectName).observe(this, new Observer<List<Task>>() {
             @Override
             public void onChanged(List<Task> tasks) {
                 TaskAdapter taskAdapter = new TaskAdapter(getApplicationContext(), tasks);
@@ -43,12 +48,10 @@ public class TaskListActivity extends AppCompatActivity  {
                 itemTouchHelper.attachToRecyclerView(recyclerViewTasks);
             }
         });
-
-
     }
 
     public void onFABClick(View view) {
-        TaskCreationSheetFragment taskCreationSheetFragment = new TaskCreationSheetFragment();
+        TaskCreationSheetFragment taskCreationSheetFragment = new TaskCreationSheetFragment(projectName);
         taskCreationSheetFragment.show(getSupportFragmentManager(), "TaskCreationSheet");
     }
 }
