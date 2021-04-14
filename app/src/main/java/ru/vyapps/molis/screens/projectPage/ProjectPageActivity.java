@@ -1,5 +1,7 @@
 package ru.vyapps.molis.screens.projectPage;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -7,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.List;
@@ -31,7 +34,12 @@ public class ProjectPageActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_task_list);
 
         projectName = getIntent().getStringExtra("projectName");
-        getSupportActionBar().setTitle(projectName);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(projectName);
+        }
 
         recyclerViewTasks = findViewById(R.id.recyclerViewTasks);
 
@@ -48,6 +56,16 @@ public class ProjectPageActivity extends AppCompatActivity  {
                 itemTouchHelper.attachToRecyclerView(recyclerViewTasks);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void onFABClick(View view) {
