@@ -20,7 +20,8 @@
         </activity>
         <activity
             android:name=".screens.projectPage.ProjectPageActivity"
-            android:label="@string/task_list_screen_label" >
+            android:label="@string/task_list_screen_label"
+            android:theme="@style/Theme.Molis.NoActionBar">
         </activity>
     </application>
 

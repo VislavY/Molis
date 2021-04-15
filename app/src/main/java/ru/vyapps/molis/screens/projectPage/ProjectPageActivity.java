@@ -3,6 +3,7 @@ package ru.vyapps.molis.screens.projectPage;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.List;
 
@@ -31,17 +34,22 @@ public class ProjectPageActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_list);
+        setContentView(R.layout.activity_project_page);
 
         projectName = getIntent().getStringExtra("projectName");
+
+        Toolbar toolbar = findViewById(R.id.projectPage_toolBar);
+        setSupportActionBar(toolbar);
+        CollapsingToolbarLayout toolbarLayout = findViewById(R.id.projectPage_toolBarLayout);
+        toolbarLayout.setTitle(projectName);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(projectName);
+            actionBar.setDisplayShowHomeEnabled(true);
         }
 
-        recyclerViewTasks = findViewById(R.id.recyclerViewTasks);
+        recyclerViewTasks = findViewById(R.id.projectPage_recyclerViewTasks);
 
         viewModel = new ProjectPageViewModel(getApplication());
         viewModel.getTasks(projectName).observe(this, new Observer<List<Task>>() {
@@ -60,9 +68,9 @@ public class ProjectPageActivity extends AppCompatActivity  {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
             finish();
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
