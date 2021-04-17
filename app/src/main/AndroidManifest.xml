@@ -21,6 +21,7 @@
         <activity
             android:name=".screens.projectPage.ProjectPageActivity"
             android:label="@string/task_list_screen_label"
+            android:parentActivityName=".screens.projects.ProjectsActivity"
             android:theme="@style/Theme.Molis.NoActionBar">
         </activity>
     </application>
