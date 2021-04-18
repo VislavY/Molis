@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toolbar;
 
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class ProjectsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projects);
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerViewProjects = findViewById(R.id.recyclerViewProjects);
 

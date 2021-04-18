@@ -43,7 +43,7 @@ public class ProjectPageActivity extends AppCompatActivity  {
 
         Toolbar toolbar = findViewById(R.id.projectPage_toolBar);
         setSupportActionBar(toolbar);
-        CollapsingToolbarLayout toolbarLayout = findViewById(R.id.projectPage_toolBarLayout);
+        CollapsingToolbarLayout toolbarLayout = findViewById(R.id.projectPage_toolbarLayout);
         toolbarLayout.setTitle(projectName);
 
         ActionBar actionBar = getSupportActionBar();

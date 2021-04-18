@@ -16,11 +16,10 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/projectPage.toolBarLayout"
+            android:id="@+id/projectPage.toolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/blue"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@id/projectPage.toolBar">
 
@@ -29,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -46,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="18dp"
         android:src="@drawable/round_add_24"
-        android:contentDescription="@string/create_task_desc"
+        android:contentDescription="@string/content_description_create_task"
         android:onClick="onFABClick"
         app:layout_anchor="@id/projectPage.appBar"
         app:layout_anchorGravity="end|bottom" />
