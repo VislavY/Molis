@@ -1,6 +1,7 @@
 package ru.vyapps.molis.screens.projects;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toolbar;
 
 import java.util.List;
 
@@ -31,9 +31,10 @@ public class ProjectsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projects);
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = findViewById(R.id.projects_topAppBar);
+        setSupportActionBar(toolbar);
 
-        recyclerViewProjects = findViewById(R.id.recyclerViewProjects);
+        recyclerViewProjects = findViewById(R.id.projects_recyclerViewProjects);
 
         viewModel = new ProjectsViewModel(getApplication());
         viewModel.getProjects().observe(this, new Observer<List<Project>>() {

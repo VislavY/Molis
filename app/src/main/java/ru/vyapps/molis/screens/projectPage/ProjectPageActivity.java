@@ -9,11 +9,15 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.CheckedTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -40,14 +44,15 @@ public class ProjectPageActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_project_page);
 
         projectName = getIntent().getStringExtra("projectName");
+        TextView textViewTitle = findViewById(R.id.projectPage_title);
+        textViewTitle.setText(projectName);
 
-        Toolbar toolbar = findViewById(R.id.projectPage_toolBar);
+        Toolbar toolbar = findViewById(R.id.projectPage_topAppBar);
         setSupportActionBar(toolbar);
-        CollapsingToolbarLayout toolbarLayout = findViewById(R.id.projectPage_toolbarLayout);
-        toolbarLayout.setTitle(projectName);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
@@ -65,6 +70,21 @@ public class ProjectPageActivity extends AppCompatActivity  {
                 TaskTouchHelperCallback callback = new TaskTouchHelperCallback(taskAdapter);
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
                 itemTouchHelper.attachToRecyclerView(recyclerViewTasks);
+
+                taskAdapter.setOnTaskClickListener(new TaskAdapter.onTaskClickListener() {
+                    @Override
+                    public void onClick(CheckedTextView checkedTextView) {
+                        checkedTextView.setChecked(!checkedTextView.isChecked());
+
+                        if (checkedTextView.isChecked()) {
+                            checkedTextView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                            checkedTextView.setTextColor(getResources().getColor(R.color.reply_blue_800));
+                        } else {
+                            checkedTextView.setPaintFlags(0);
+                            checkedTextView.setTextColor(getResources().getColor(R.color.black));
+                        }
+                    }
+                });
             }
         });
     }

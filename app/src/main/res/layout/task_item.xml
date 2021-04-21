@@ -9,26 +9,22 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
         android:orientation="horizontal">
 
         <CheckedTextView
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginVertical="16dp"
+            android:layout_marginVertical="12dp"
             android:singleLine="true"
             android:textSize="16sp"
             android:textColor="@color/black"
+            android:gravity="center_vertical"
             android:drawableStart="?android:attr/listChoiceIndicatorMultiple"/>
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/viewBottomLine"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/black"/>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.25dp"
+            android:background="@color/reply_blue_50"/>
 </LinearLayout>

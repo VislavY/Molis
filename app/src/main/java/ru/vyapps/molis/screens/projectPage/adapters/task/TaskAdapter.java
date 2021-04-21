@@ -19,6 +19,8 @@ import ru.vyapps.molis.models.pojo.Task;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TasksViewHolder> implements  TaskTouchHelperAdapter {
 
+    private static onTaskClickListener onTaskClickListener;
+
     private static TasksDatabase database;
     private List<Task> tasks;
 
@@ -70,6 +72,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TasksViewHolde
         notifyItemRemoved(position);
     }
 
+    public void setOnTaskClickListener(onTaskClickListener l) {
+        onTaskClickListener = l;
+    }
+
+    public interface onTaskClickListener {
+        void onClick(CheckedTextView checkedTextView);
+    }
+
     private static class DeleteTaskTask extends AsyncTask<Task, Void, Void> {
         @Override
         protected Void doInBackground(Task... tasks) {
@@ -88,17 +98,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TasksViewHolde
             super(itemView);
 
             checkedTextViewTaskName = itemView.findViewById(R.id.textViewTitle);
-
-            checkedTextViewTaskName.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    checkedTextViewTaskName.setChecked(!checkedTextViewTaskName.isChecked());
-
-                    if (checkedTextViewTaskName.isChecked()) {
-                        checkedTextViewTaskName.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-                    } else {
-                        checkedTextViewTaskName.setPaintFlags(0);
-                    }
+                    onTaskClickListener.onClick(checkedTextViewTaskName);
                 }
             });
         }

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Molis" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Molis" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/reply_blue_800</item>
         <item name="colorPrimaryVariant">@color/reply_blue_200</item>
@@ -12,5 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ThemeOverlay.Molis.ActionBar" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="colorControlNormal">@color/reply_blue_800</item>
     </style>
 </resources>
